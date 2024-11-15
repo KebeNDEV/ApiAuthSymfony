@@ -1,3 +1,5 @@
+{# templates/curso/edit.html.twig #}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Curso{% endblock %}
@@ -5,9 +7,18 @@
 {% block body %}
     <h1>Edit Curso</h1>
 
-    {{ include('curso/_form.html.twig', {'button_label': 'Update'}) }}
+    {# Formulario del curso con asignaturas #}
+    {{ form_start(form) }}
+        {{ form_row(form.nombre) }}
+        
+        {# Aquí se muestra el campo de asignaturas como un select con opciones #}
+        <div class="form-group">
+            <label for="asignaturas">Asignaturas</label>
+            {{ form_row(form.asignaturas) }}
+        </div>
 
-    <a href="{{ path('app_curso_index') }}">back to list</a>
+        <button class="btn btn-primary" type="submit">Update Course</button>
+    {{ form_end(form) }}
 
-    {{ include('curso/_delete_form.html.twig') }}
+    <a href="{{ path('app_curso_index') }}">Back to list</a>
 {% endblock %}

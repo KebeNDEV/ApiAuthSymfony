@@ -7,16 +7,33 @@ body {
 
 /* Modo oscuro */
 .bg-dark {
-    background-color: #2e2d2d !important;
-    color: #f8f9fa !important;
+    background-color: #2c2f36 !important;  /* Un gris oscuro más suave */
+    color: #e0e0e0 !important;  /* Un texto más claro, pero no tan brillante */
 }
 
+/* Para textos específicos */
 .text-white {
-    color: #f8f9fa !important;
+    color: #e0e0e0 !important;
 }
 
+/* Estilo de la navbar y otros botones */
 .navbar, .btn, .table {
     border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo para las tablas en modo oscuro */
+.table {
+    background-color: #333333;  /* Fondo gris oscuro para la tabla */
+    color: #e0e0e0;  /* Texto claro */
+}
+
+.table th {
+    background-color: #444444;  /* Un gris más oscuro para los encabezados */
+    color: #e0e0e0;
+}
+
+.table tbody tr:hover {
+    background-color: #555555;  /* Un hover suave para las filas */
 }
 
 /* Ajustar el botón y la posición en la parte superior derecha */

@@ -52,28 +52,32 @@ final class CursoController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_curso_edit', methods: ['GET', 'POST'])]
+    #[Route('/curso/{id}/edit', name: 'app_curso_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Curso $curso, EntityManagerInterface $entityManager): Response
     {
+        // Crear el formulario para editar el curso
         $form = $this->createForm(CursoType::class, $curso);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Cuando el formulario es enviado, se guardan las asignaturas asociadas al curso
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_curso_index', [], Response::HTTP_SEE_OTHER);
+            // Redirigir al índice de cursos después de guardar los cambios
+            return $this->redirectToRoute('app_curso_index');
         }
 
+        // Renderizar la vista de edición con el formulario
         return $this->render('curso/edit.html.twig', [
             'curso' => $curso,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_curso_delete', methods: ['POST'])]
     public function delete(Request $request, Curso $curso, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$curso->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $curso->getId(), $request->request->get('_token'))) {
             $entityManager->remove($curso);
             $entityManager->flush();
         }
