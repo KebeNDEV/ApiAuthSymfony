@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/curso')]
 final class CursoController extends AbstractController
@@ -45,8 +45,10 @@ final class CursoController extends AbstractController
     #[Route('/{id}', name: 'app_curso_show', methods: ['GET'])]
     public function show(Curso $curso): Response
     {
+        // Este método ya está listo para pasar el curso con sus asignaturas
         return $this->render('curso/show.html.twig', [
             'curso' => $curso,
+            'asignaturas' => $curso->getAsignaturas(), // Pasamos las asignaturas del curso a la vista
         ]);
     }
 
@@ -71,7 +73,7 @@ final class CursoController extends AbstractController
     #[Route('/{id}', name: 'app_curso_delete', methods: ['POST'])]
     public function delete(Request $request, Curso $curso, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$curso->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$curso->getId(), $request->request->get('_token'))) {
             $entityManager->remove($curso);
             $entityManager->flush();
         }

@@ -1,0 +1,28 @@
+/* styles.css */
+
+/* Añadir una transición suave para el fondo y los colores de texto */
+body {
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+}
+
+/* Modo oscuro */
+.bg-dark {
+    background-color: #2e2d2d !important;
+    color: #f8f9fa !important;
+}
+
+.text-white {
+    color: #f8f9fa !important;
+}
+
+.navbar, .btn, .table {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ajustar el botón y la posición en la parte superior derecha */
+#toggleTheme {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+}

@@ -10,7 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>actions</th>
+                <th>Asignaturas</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,13 +20,24 @@
                 <td>{{ curso.id }}</td>
                 <td>{{ curso.nombre }}</td>
                 <td>
-                    <a href="{{ path('app_curso_show', {'id': curso.id}) }}">show</a>
-                    <a href="{{ path('app_curso_edit', {'id': curso.id}) }}">edit</a>
+                    {% if curso.asignaturas|length > 0 %}
+                        <ul>
+                            {% for asignatura in curso.asignaturas %}
+                                <li>{{ asignatura.nombre }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span>No hay asignaturas</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_curso_show', {'id': curso.id}) }}">Show</a>
+                    <a href="{{ path('app_curso_edit', {'id': curso.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="4">No records found</td>
             </tr>
         {% endfor %}
         </tbody>
