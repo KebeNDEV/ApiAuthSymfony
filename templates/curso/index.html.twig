@@ -28,7 +28,7 @@
                         <td>{{ curso.nombre }}</td>
                         <td>
                             {% if curso.asignaturas|length > 0 %}
-                                <div class="d-flex flex-wrap gap-2">
+                                <div class="badge-container">
                                     {% for asignatura in curso.asignaturas %}
                                         <span class="badge bg-info badge-custom">
                                             {{ asignatura.nombre }}
@@ -63,24 +63,3 @@
     </div>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .badge-custom {
-            padding: 0.5em 1em;
-            margin: 0.2em;
-            font-size: 0.85em;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .gap-2 {
-            gap: 0.5rem !important;
-        }
-
-        td .d-flex.flex-wrap {
-            margin: -0.2em;
-            padding: 0.2em 0;
-        }
-    </style>
-{% endblock %}

@@ -1,0 +1,394 @@
+:root {
+    /* Light theme variables */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --navbar-bg: #4a90e2;
+    --navbar-text: #ffffff;
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+    /* Dark theme variables */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    --border-color: #404040;
+    --card-bg: #2d2d2d;
+    --navbar-bg: #2d2d2d;
+    --navbar-text: #f8f9fa;
+    --shadow-color: rgba(0,0,0,0.3);
+}
+
+/* General styles */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: var(--navbar-bg);
+}
+
+.navbar-brand, .nav-link {
+    color: var(--navbar-text) !important;
+}
+
+/* Card styles */
+.card-custom {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: 0 0 15px var(--shadow-color);
+}
+
+.card-header {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+}
+
+/* Table styles */
+.table {
+    color: var(--text-primary);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--bg-secondary);
+}
+
+/* Form styles */
+.form-control {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Button styles */
+.btn-custom {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-custom:hover {
+    transform: translateY(-2px);
+}
+
+/* Theme toggle button */
+#theme-toggle {
+    border-color: var(--navbar-text);
+    color: var(--navbar-text);
+}
+
+#theme-toggle:hover {
+    background-color: var(--navbar-text);
+    color: var(--navbar-bg);
+}
+
+/* Rest of your existing styles... */
+
+/* Dark Theme */
+.dark-theme {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.dark-theme .card-custom {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-theme .table {
+    color: #ffffff;
+}
+
+.dark-theme .table-hover tbody tr:hover {
+    background-color: #3d3d3d;
+}
+
+.dark-theme .form-control {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+.dark-theme .form-control:focus {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+.dark-theme .card-header:not(.bg-primary) {
+    background-color: #2d2d2d;
+    border-bottom-color: #404040;
+}
+
+.dark-theme .text-muted {
+    color: #adb5bd !important;
+}
+
+.dark-theme .border {
+    border-color: #404040 !important;
+}
+
+.dark-theme .badge-custom {
+    background-color: #4a90e2;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+/* Contenedor principal */
+.main-container {
+    padding: 2rem;
+}
+
+/* Estilos para las tablas */
+.custom-table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.custom-table thead {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.custom-table th, .custom-table td {
+    padding: 1rem !important;
+}
+
+/* Botones personalizados */
+.btn-custom {
+    border-radius: 20px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-custom-primary {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+}
+
+.btn-custom-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-custom-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+/* Cards */
+.card-custom {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Badges */
+.badge-custom {
+    padding: 0.5em 1em;
+    margin: 0.2em;
+    font-size: 0.85em;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 20px;
+}
+
+/* Grid de asignaturas */
+.asignaturas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0.5rem;
+}
+
+/* Contenedor de badges */
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Modo Oscuro */
+body.dark-mode {
+    background-color: #222831;
+    color: #EEEEEE;
+}
+
+.dark-mode .card-custom,
+.dark-mode .card-body {
+    background-color: #393E46;
+    border-color: #454e59;
+}
+
+.dark-mode .card-header {
+    background-color: #4a90e2 !important;
+    color: white;
+    border-bottom: 1px solid #454e59;
+}
+
+.dark-mode .form-control,
+.dark-mode .form-select {
+    background-color: #2D3239;
+    border-color: #454e59;
+    color: #EEEEEE;
+}
+
+.dark-mode .form-control:focus,
+.dark-mode .form-select:focus {
+    background-color: #2D3239;
+    color: #EEEEEE;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 0.25rem rgba(74, 144, 226, 0.25);
+}
+
+.dark-mode label,
+.dark-mode .form-label {
+    color: #EEEEEE;
+}
+
+.dark-mode .asignatura-item {
+    background-color: #2D3239;
+    border-color: #454e59 !important;
+}
+
+.dark-mode .table,
+.dark-mode .custom-table {
+    color: #EEEEEE;
+    background-color: #393E46;
+}
+
+.dark-mode .table > :not(caption) > * > * {
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+.dark-mode .custom-table thead {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.dark-mode .table tbody tr {
+    background-color: #393E46;
+}
+
+.dark-mode .table-hover tbody tr:hover {
+    background-color: #454e59;
+}
+
+.dark-mode .table td, 
+.dark-mode .table th {
+    border-color: #454e59;
+}
+
+.dark-mode .badge-custom {
+    background-color: #4a90e2;
+}
+
+.dark-mode .text-muted {
+    color: #B2B2B2 !important;
+}
+
+.dark-mode .border {
+    border-color: #454e59 !important;
+}
+
+.dark-mode .alert-info {
+    background-color: #2D3239;
+    border-color: #4a90e2;
+    color: #EEEEEE;
+}
+
+.dark-mode .asignaturas-grid .card {
+    background-color: #2D3239;
+    border-color: #454e59;
+}
+
+.dark-mode .btn-custom-secondary {
+    background-color: #505762;
+}
+
+.dark-mode .btn-custom:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.dark-mode #asignaturas-container input {
+    background-color: #2D3239;
+    border-color: #454e59;
+    color: #EEEEEE;
+}
+
+.dark-mode #asignaturas-container input:focus {
+    background-color: #2D3239;
+    color: #EEEEEE;
+    border-color: #4a90e2;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .asignaturas-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modo Oscuro - Ajustes de texto */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode .card-title,
+.dark-mode .mb-0,
+.dark-mode .card-header h3 {
+    color: #EEEEEE !important;
+}
+
+/* Ajustes específicos para los títulos en las cards */
+.dark-mode .card-custom .card-header {
+    background-color: #4a90e2 !important;
+    color: #EEEEEE;
+}
+
+/* Ajustes para los iconos en los títulos */
+.dark-mode .fas,
+.dark-mode .fa-graduation-cap,
+.dark-mode .fa-book,
+.dark-mode .fa-plus,
+.dark-mode .fa-edit {
+    color: #EEEEEE;
+}
+
+/* Ajustes para los textos en la navegación */
+.dark-mode .navbar-brand,
+.dark-mode .nav-link {
+    color: #EEEEEE !important;
+}
