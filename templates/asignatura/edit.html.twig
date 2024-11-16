@@ -1,13 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Asignatura{% endblock %}
+{% block title %}Editar Asignatura{% endblock %}
 
 {% block body %}
-    <h1>Edit Asignatura</h1>
+    <div class="card card-custom">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-edit me-2"></i>Editar Asignatura
+            </h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+                <div class="mb-4">
+                    {{ form_row(form.nombre, {
+                        'label_attr': {'class': 'form-label'},
+                        'attr': {'class': 'form-control'}
+                    }) }}
+                </div>
 
-    {{ include('asignatura/_form.html.twig', {'button_label': 'Update'}) }}
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-custom btn-custom-primary">
+                        <i class="fas fa-save me-2"></i>Guardar Cambios
+                    </button>
+                    <a href="{{ path('app_asignatura_index') }}" class="btn btn-custom btn-custom-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver
+                    </a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
 
-    <a href="{{ path('app_asignatura_index') }}">back to list</a>
-
-    {{ include('asignatura/_delete_form.html.twig') }}
+    <div class="mt-3">
+        {{ include('asignatura/_delete_form.html.twig', {
+            'button_label': 'Eliminar Asignatura',
+            'button_class': 'btn btn-custom btn-custom-danger w-100'
+        }) }}
+    </div>
 {% endblock %}

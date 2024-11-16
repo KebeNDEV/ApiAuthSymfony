@@ -1,4 +1,8 @@
-<form method="post" action="{{ path('app_asignatura_delete', {'id': asignatura.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<form method="post" action="{{ path('app_asignatura_delete', {'id': asignatura.id}) }}" 
+      onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta asignatura?');" 
+      class="d-inline">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ asignatura.id) }}">
-    <button class="btn">Delete</button>
+    <button type="submit" class="{{ button_class|default('btn btn-sm btn-custom btn-custom-danger') }}">
+        <i class="fas fa-trash me-2"></i>{{ button_label|default('Eliminar') }}
+    </button>
 </form>

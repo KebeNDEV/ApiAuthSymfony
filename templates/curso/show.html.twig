@@ -1,26 +1,95 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Curso{% endblock %}
+{% block title %}Detalles de Curso{% endblock %}
 
 {% block body %}
-    <h1>Curso</h1>
+    <div class="card card-custom">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-graduation-cap me-2"></i>Detalles de Curso
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive mb-4">
+                <table class="table custom-table">
+                    <tbody>
+                        <tr>
+                            <th class="w-25">ID</th>
+                            <td>{{ curso.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{ curso.nombre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ curso.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ curso.nombre }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="mt-4">
+                <h4 class="mb-3">
+                    <i class="fas fa-book me-2"></i>Asignaturas del Curso
+                </h4>
+                {% if curso.asignaturas|length > 0 %}
+                    <div class="row">
+                        {% for asignatura in curso.asignaturas %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-book-open me-2"></i>{{ asignatura.nombre }}
+                                        </h5>
+                                        <div class="mt-3">
+                                            <a href="{{ path('app_asignatura_show', {'id': asignatura.id}) }}" 
+                                               class="btn btn-sm btn-custom btn-custom-secondary me-2">
+                                                <i class="fas fa-eye me-1"></i>Ver
+                                            </a>
+                                            <a href="{{ path('app_asignatura_edit', {'id': asignatura.id}) }}" 
+                                               class="btn btn-sm btn-custom btn-custom-primary">
+                                                <i class="fas fa-edit me-1"></i>Editar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>Este curso no tiene asignaturas asignadas.
+                    </div>
+                {% endif %}
+            </div>
 
-    <a href="{{ path('app_curso_index') }}">back to list</a>
+            <div class="d-flex justify-content-between mt-4">
+                <div>
+                    <a href="{{ path('app_curso_edit', {'id': curso.id}) }}" 
+                       class="btn btn-custom btn-custom-primary me-2">
+                        <i class="fas fa-edit me-2"></i>Editar Curso
+                    </a>
+                    <a href="{{ path('app_curso_index') }}" 
+                       class="btn btn-custom btn-custom-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('app_curso_edit', {'id': curso.id}) }}">edit</a>
+    <div class="mt-3">
+        <form method="post" action="{{ path('app_curso_delete', {'id': curso.id}) }}"
+              onsubmit="return confirm('¿Estás seguro de que deseas eliminar este curso? Esta acción también eliminará todas las asignaturas asociadas.');"
+              class="w-100">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ curso.id) }}">
+            <button class="btn btn-custom btn-custom-danger w-100">
+                <i class="fas fa-trash me-2"></i>Eliminar Curso
+            </button>
+        </form>
+    </div>
 
-    {{ include('curso/_delete_form.html.twig') }}
+    {% if curso.asignaturas|length > 0 %}
+        <div class="alert alert-warning mt-3">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Advertencia:</strong> Al eliminar este curso, también se eliminarán todas las asignaturas asociadas.
+        </div>
+    {% endif %}
 {% endblock %}

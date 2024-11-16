@@ -10,18 +10,19 @@
             function addAsignaturaForm() {
                 const container = document.querySelector('#asignaturas-container');
                 const prototype = container.dataset.prototype;
-                const index = container.dataset.index;
+                const index = parseInt(container.dataset.index);
                 const newForm = prototype.replace(/__name__/g, index);
-                container.dataset.index = parseInt(index) + 1;
+                container.dataset.index = index + 1;
                 
                 const div = document.createElement('div');
+                div.classList.add('asignatura-item', 'mb-3', 'p-3', 'border', 'rounded', 'position-relative');
                 div.innerHTML = newForm;
-                div.classList.add('asignatura-item', 'mb-3');
                 
+                // Añadir botón de eliminar
                 const deleteButton = document.createElement('button');
-                deleteButton.innerText = 'Eliminar asignatura';
-                deleteButton.classList.add('btn', 'btn-danger', 'btn-sm', 'mt-2');
                 deleteButton.type = 'button';
+                deleteButton.classList.add('btn', 'btn-sm', 'btn-custom', 'btn-custom-danger', 'position-absolute', 'top-0', 'end-0', 'm-2');
+                deleteButton.innerHTML = '<i class="fas fa-times"></i>';
                 deleteButton.onclick = function() {
                     div.remove();
                 };
@@ -32,9 +33,9 @@
 
             // Agregar botón para nuevas asignaturas
             const addButton = document.createElement('button');
-            addButton.innerText = 'Añadir asignatura';
-            addButton.classList.add('btn', 'btn-primary', 'mb-3');
             addButton.type = 'button';
+            addButton.classList.add('btn', 'btn-custom', 'btn-custom-primary', 'mb-3');
+            addButton.innerHTML = '<i class="fas fa-plus me-2"></i>Añadir asignatura';
             addButton.onclick = addAsignaturaForm;
 
             const container = document.querySelector('#asignaturas-container');
@@ -43,9 +44,9 @@
             // Agregar botones de eliminar a las asignaturas existentes
             document.querySelectorAll('.asignatura-item').forEach(item => {
                 const deleteButton = document.createElement('button');
-                deleteButton.innerText = 'Eliminar asignatura';
-                deleteButton.classList.add('btn', 'btn-danger', 'btn-sm', 'mt-2');
                 deleteButton.type = 'button';
+                deleteButton.classList.add('btn', 'btn-sm', 'btn-custom', 'btn-custom-danger', 'position-absolute', 'top-0', 'end-0', 'm-2');
+                deleteButton.innerHTML = '<i class="fas fa-times"></i>';
                 deleteButton.onclick = function() {
                     item.remove();
                 };
@@ -56,27 +57,43 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <h1>Crear nuevo Curso</h1>
+    <div class="card card-custom">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-plus me-2"></i>Nuevo Curso
+            </h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+                <div class="mb-4">
+                    {{ form_row(form.nombre, {
+                        'label_attr': {'class': 'form-label'},
+                        'attr': {'class': 'form-control'}
+                    }) }}
+                </div>
 
-        {{ form_start(form) }}
-            {{ form_row(form.nombre) }}
-
-            <h3>Asignaturas</h3>
-            <div id="asignaturas-container" 
-                 data-prototype="{{ form_widget(form.asignaturas.vars.prototype)|e('html_attr') }}"
-                 data-index="{{ form.asignaturas|length }}">
-                {% for asignaturaForm in form.asignaturas %}
-                    <div class="asignatura-item mb-3">
-                        {{ form_row(asignaturaForm.nombre) }}
+                <div class="mb-4">
+                    <h4><i class="fas fa-book me-2"></i>Asignaturas</h4>
+                    <div id="asignaturas-container" 
+                         data-prototype="{{ form_widget(form.asignaturas.vars.prototype)|e('html_attr') }}"
+                         data-index="{{ form.asignaturas|length }}">
+                        {% for asignaturaForm in form.asignaturas %}
+                            <div class="asignatura-item mb-3 p-3 border rounded position-relative">
+                                {{ form_row(asignaturaForm.nombre) }}
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </div>
+                </div>
 
-            <button type="submit" class="btn btn-success mt-3">{{ button_label|default('Crear curso') }}</button>
-            {{ form_row(form._token) }}
-        {{ form_end(form, {'render_rest': false}) }}
-
-        <a href="{{ path('app_curso_index') }}" class="btn btn-secondary mt-3">Volver al listado</a>
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-custom btn-custom-primary">
+                        <i class="fas fa-save me-2"></i>Crear Curso
+                    </button>
+                    <a href="{{ path('app_curso_index') }}" class="btn btn-custom btn-custom-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver
+                    </a>
+                </div>
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
