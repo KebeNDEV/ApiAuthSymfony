@@ -17,7 +17,7 @@ class Asignatura
     private ?string $nombre = null;
 
     #[ORM\ManyToOne(inversedBy: 'asignaturas')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Curso $curso = null;
 
     public function getId(): ?int

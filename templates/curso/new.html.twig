@@ -1,11 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Curso{% endblock %}
+{% block title %}Nuevo Curso{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Función para agregar una nueva asignatura
+            function addAsignaturaForm() {
+                const container = document.querySelector('#asignaturas-container');
+                const prototype = container.dataset.prototype;
+                const index = container.dataset.index;
+                const newForm = prototype.replace(/__name__/g, index);
+                container.dataset.index = parseInt(index) + 1;
+                
+                const div = document.createElement('div');
+                div.innerHTML = newForm;
+                div.classList.add('asignatura-item', 'mb-3');
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.innerText = 'Eliminar asignatura';
+                deleteButton.classList.add('btn', 'btn-danger', 'btn-sm', 'mt-2');
+                deleteButton.type = 'button';
+                deleteButton.onclick = function() {
+                    div.remove();
+                };
+                
+                div.appendChild(deleteButton);
+                container.appendChild(div);
+            }
+
+            // Agregar botón para nuevas asignaturas
+            const addButton = document.createElement('button');
+            addButton.innerText = 'Añadir asignatura';
+            addButton.classList.add('btn', 'btn-primary', 'mb-3');
+            addButton.type = 'button';
+            addButton.onclick = addAsignaturaForm;
+
+            const container = document.querySelector('#asignaturas-container');
+            container.parentElement.insertBefore(addButton, container);
+
+            // Agregar botones de eliminar a las asignaturas existentes
+            document.querySelectorAll('.asignatura-item').forEach(item => {
+                const deleteButton = document.createElement('button');
+                deleteButton.innerText = 'Eliminar asignatura';
+                deleteButton.classList.add('btn', 'btn-danger', 'btn-sm', 'mt-2');
+                deleteButton.type = 'button';
+                deleteButton.onclick = function() {
+                    item.remove();
+                };
+                item.appendChild(deleteButton);
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Curso</h1>
+    <div class="container mt-4">
+        <h1>Crear nuevo Curso</h1>
 
-    {{ include('curso/_form.html.twig') }}
+        {{ form_start(form) }}
+            {{ form_row(form.nombre) }}
 
-    <a href="{{ path('app_curso_index') }}">back to list</a>
+            <h3>Asignaturas</h3>
+            <div id="asignaturas-container" 
+                 data-prototype="{{ form_widget(form.asignaturas.vars.prototype)|e('html_attr') }}"
+                 data-index="{{ form.asignaturas|length }}">
+                {% for asignaturaForm in form.asignaturas %}
+                    <div class="asignatura-item mb-3">
+                        {{ form_row(asignaturaForm.nombre) }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-success mt-3">{{ button_label|default('Crear curso') }}</button>
+            {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+
+        <a href="{{ path('app_curso_index') }}" class="btn btn-secondary mt-3">Volver al listado</a>
+    </div>
 {% endblock %}

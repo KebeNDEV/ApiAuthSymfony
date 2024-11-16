@@ -3,11 +3,12 @@
 /* Añadir una transición suave para el fondo y los colores de texto */
 body {
     transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Modo oscuro */
 .bg-dark {
-    background-color: #2e2d2d !important;
+    background-color: #1a1a1a !important;
     color: #f8f9fa !important;
 }
 
@@ -25,4 +26,120 @@ body {
     top: 15px;
     right: 15px;
     z-index: 9999;
+}
+
+/* Contenedor principal */
+.main-container {
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    margin: 2rem auto;
+}
+
+/* Estilos para las tablas */
+.custom-table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.custom-table thead {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 1rem !important;
+}
+
+/* Botones personalizados */
+.btn-custom {
+    border-radius: 20px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-custom-primary {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+}
+
+.btn-custom-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-custom-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+/* Efectos hover para botones */
+.btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Estilos para formularios */
+.form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+/* Estilos para las cards */
+.card-custom {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Badges y etiquetas */
+.badge-custom {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Ajustes para el modo oscuro */
+.dark-mode .main-container {
+    background-color: #2d2d2d;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.dark-mode .form-control {
+    background-color: #333;
+    border-color: #444;
+    color: #fff;
+}
+
+.dark-mode .card-custom {
+    background-color: #2d2d2d;
 }

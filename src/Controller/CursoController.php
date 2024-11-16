@@ -59,9 +59,14 @@ final class CursoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_curso_index', [], Response::HTTP_SEE_OTHER);
+            try {
+                $entityManager->persist($curso);
+                $entityManager->flush();
+                $this->addFlash('success', 'Curso actualizado correctamente.');
+                return $this->redirectToRoute('app_curso_index');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Error al actualizar el curso: ' . $e->getMessage());
+            }
         }
 
         return $this->render('curso/edit.html.twig', [

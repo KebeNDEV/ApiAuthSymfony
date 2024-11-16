@@ -21,7 +21,7 @@ class Curso
     /**
      * @var Collection<int, Asignatura>
      */
-    #[ORM\OneToMany(targetEntity: Asignatura::class, mappedBy: 'curso')]
+    #[ORM\OneToMany(targetEntity: Asignatura::class, mappedBy: 'curso', cascade: ['persist', 'remove'])]
     private Collection $asignaturas;
 
     public function __construct()
@@ -66,8 +66,9 @@ class Curso
 
     public function removeAsignatura(Asignatura $asignatura): static
     {
-        if ($this->asignaturas->removeElement($asignatura)) {
-            // set the owning side to null (unless already changed)
+        if ($this->asignaturas->contains($asignatura)) {
+            $this->asignaturas->removeElement($asignatura);
+            // Desvincula la asignatura del curso
             if ($asignatura->getCurso() === $this) {
                 $asignatura->setCurso(null);
             }
