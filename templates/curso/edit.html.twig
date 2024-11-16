@@ -2,60 +2,6 @@
 
 {% block title %}Editar Curso{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Función para agregar una nueva asignatura
-            function addAsignaturaForm() {
-                const container = document.querySelector('#asignaturas-container');
-                const prototype = container.dataset.prototype;
-                const index = parseInt(container.dataset.index);
-                const newForm = prototype.replace(/__name__/g, index);
-                container.dataset.index = index + 1;
-                
-                const div = document.createElement('div');
-                div.classList.add('asignatura-item', 'mb-3', 'p-3', 'border', 'rounded', 'position-relative');
-                div.innerHTML = newForm;
-                
-                // Añadir botón de eliminar
-                const deleteButton = document.createElement('button');
-                deleteButton.type = 'button';
-                deleteButton.classList.add('btn', 'btn-sm', 'btn-custom', 'btn-custom-danger', 'position-absolute', 'top-0', 'end-0', 'm-2');
-                deleteButton.innerHTML = '<i class="fas fa-times"></i>';
-                deleteButton.onclick = function() {
-                    div.remove();
-                };
-                
-                div.appendChild(deleteButton);
-                container.appendChild(div);
-            }
-
-            // Agregar botón para nuevas asignaturas
-            const addButton = document.createElement('button');
-            addButton.type = 'button';
-            addButton.classList.add('btn', 'btn-custom', 'btn-custom-primary', 'mb-3');
-            addButton.innerHTML = '<i class="fas fa-plus me-2"></i>Añadir asignatura';
-            addButton.onclick = addAsignaturaForm;
-
-            const container = document.querySelector('#asignaturas-container');
-            container.parentElement.insertBefore(addButton, container);
-
-            // Agregar botones de eliminar a las asignaturas existentes
-            document.querySelectorAll('.asignatura-item').forEach(item => {
-                const deleteButton = document.createElement('button');
-                deleteButton.type = 'button';
-                deleteButton.classList.add('btn', 'btn-sm', 'btn-custom', 'btn-custom-danger', 'position-absolute', 'top-0', 'end-0', 'm-2');
-                deleteButton.innerHTML = '<i class="fas fa-times"></i>';
-                deleteButton.onclick = function() {
-                    item.remove();
-                };
-                item.appendChild(deleteButton);
-            });
-        });
-    </script>
-{% endblock %}
-
 {% block body %}
     <div class="card card-custom">
         <div class="card-header bg-primary text-white">
@@ -66,10 +12,7 @@
         <div class="card-body">
             {{ form_start(form) }}
                 <div class="mb-4">
-                    {{ form_row(form.nombre, {
-                        'label_attr': {'class': 'form-label'},
-                        'attr': {'class': 'form-control'}
-                    }) }}
+                    {{ form_row(form.nombre) }}
                 </div>
 
                 <div class="mb-4">
