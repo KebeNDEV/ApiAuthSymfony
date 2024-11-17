@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-custom">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-user-plus me-2"></i>Registro de Usuario
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(registrationForm) }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form_row(registrationForm.nombre) }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form_row(registrationForm.apellidos) }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.email) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.plainPassword) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.roles) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.agreeTerms) }}
+                        </div>
+
+                        <button type="submit" class="btn btn-custom btn-custom-primary">
+                            <i class="fas fa-save me-2"></i>Registrar
+                        </button>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
